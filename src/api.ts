@@ -1,20 +1,28 @@
-import { serve } from "https://deno.land/std@0.130.0/http/server.ts";
-
-import { buildSite } from "./utils.ts";
+import { serve } from "./api_deps.ts";
+import { buildSite } from "./mod.ts";
 
 const port = 8080;
 
 const handler = (request: Request): Response => {
-  const url = new URL(request.url);
+  const requestURL = new URL(request.url);
 
-  if (url.pathname !== "/" && url.pathname !== "/favicon.ico") {
-    let site = url.pathname.substring(1);
+  if (requestURL.pathname !== "/" && requestURL.pathname !== "/favicon.ico") {
+    let url = requestURL.pathname.substring(1);
 
-    if (!site.startsWith("http")) {
-      site = `https://${site}`;
+    if (!url.startsWith("http")) {
+      url = `https://${url}`;
     }
 
-    return new Response(buildSite({ url: site }), {
+    const time = requestURL.searchParams.get("time");
+    const title = requestURL.searchParams.get("title");
+
+    const config = {
+      url,
+      title: title ?? undefined,
+      time: time ? Number.parseInt(time) : undefined,
+    };
+
+    return new Response(buildSite(config), {
       status: 200,
       headers: { "content-type": "text/html" },
     });
