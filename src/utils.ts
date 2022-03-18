@@ -1,33 +1,40 @@
 // https://github.com/UltiRequiem/ultirequiem.github.io
 
-export function buildSite(url: string) {
-  return `<!DOCTYPE html>
-<html>
-<head>
-<title>ultirequiem.com</title>
+import { html } from "https://deno.land/x/html/mod.ts";
 
-<script type="module" defer>
-const seconds = document.getElementById("seconds")
+interface BuildSiteConfig {
+  url: string;
+  title?: string;
+  time?: number;
+}
 
-let counter=5;
+export function buildSite({
+  url,
+  time = 500,
+  title = "Redirecting...",
+}: BuildSiteConfig) {
+  return html`<!DOCTYPE html>
+    <html>
+      <head>
+        <title>${title}</title>
 
-setInterval(()=>{
-    seconds.innerText = counter
-    
-    if (--counter === 0) {
-      window.location.assign("${url}")
-    }
+        <script type="module" defer>
+          const seconds = document.getElementById("seconds");
 
-}, 1000)
+          let counter = 5;
 
-</script>
+          setInterval(() => {
+            seconds.innerText = counter;
 
-</head>
+            if (--counter === 0) {
+              window.location.assign("${url}");
+            }
+          }, ${time});
+        </script>
+      </head>
 
-<body>
-The new site is https://ultirequiem.com/
-Redirecting you in <span id="seconds"> 5 </span>
-</body>
-
-</html>`;
+      <body>
+        Redirecting you to "${url}" in <span id="seconds"> 5 </span>
+      </body>
+    </html>`;
 }

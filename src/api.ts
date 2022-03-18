@@ -7,10 +7,14 @@ const port = 8080;
 const handler = (request: Request): Response => {
   const url = new URL(request.url);
 
-  if (url.pathname !== "/") {
-    const site = url.pathname.substring(1);
+  if (url.pathname !== "/" && url.pathname !== "/favicon.ico") {
+    let site = url.pathname.substring(1);
 
-    return new Response(buildSite(site), {
+    if (!site.startsWith("http")) {
+      site = `https://${site}`;
+    }
+
+    return new Response(buildSite({ url: site }), {
       status: 200,
       headers: { "content-type": "text/html" },
     });
