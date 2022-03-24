@@ -10,11 +10,21 @@ Easily create a custom redirector 🚀
 
 A UI that will help you to generate your site redirector.
 
-## `/?page=URL`
+### `/?page=URL`
 
 > https://redirector.deno.dev/?page=ultirequiem.com
 
 A pretty (soon™) page that wil redirect your users to `$URL`.
+
+📝 Optional Params
+
+- `title`: The title for the HTML Page 📰
+
+- `time`: How much time it will take to redirect the user ⏳
+
+Example using both 👇
+
+> https://redirector.deno.dev/?page=ultirequiem.com&title=UltiRequiem&time=1000
 
 ## Support
 
