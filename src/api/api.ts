@@ -1,9 +1,12 @@
 import { serve } from "./api_deps.ts";
-import { buildSite } from "./mod.ts";
+
+import type { Handler } from "./api_deps.ts";
+
+import { buildSite } from "../mod.ts";
 
 const port = 8080;
 
-const handler = (request: Request): Response => {
+const handler: Handler = (request) => {
   const requestURL = new URL(request.url);
 
   if (requestURL.pathname !== "/" && requestURL.pathname !== "/favicon.ico") {
@@ -17,12 +20,11 @@ const handler = (request: Request): Response => {
     const title = requestURL.searchParams.get("title");
 
     const config = {
-      url,
-      title: title ?? undefined,
+      title,
       time: time ? Number.parseInt(time) : undefined,
     };
 
-    return new Response(buildSite(config), {
+    return new Response(buildSite(url, config), {
       status: 200,
       headers: { "content-type": "text/html" },
     });

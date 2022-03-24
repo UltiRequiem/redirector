@@ -1,16 +1,13 @@
 import { html } from "https://deno.land/x/html@v1.2.0/mod.ts";
 
 export interface BuildSiteConfig {
-  url: string;
-  title?: string;
-  time?: number;
+  title?: string | null;
+  time?: number | null;
 }
 
-export function buildSite({
-  url,
-  time = 500,
-  title = "Redirecting...",
-}: BuildSiteConfig) {
+export function buildSite(url: string, config: BuildSiteConfig = {}) {
+  const { time = 5000, title = "Redirecting..." } = config;
+
   return html`<!DOCTYPE html>
     <html>
       <head>

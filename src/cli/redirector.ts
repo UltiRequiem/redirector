@@ -1,4 +1,4 @@
-import { buildSite } from "./mod.ts";
+import { buildSite } from "../mod.ts";
 
 import { parse } from "./cli_deps.ts";
 
@@ -15,6 +15,6 @@ if (!url) {
   Deno.exit(1);
 }
 
-const site = buildSite({ url: url.toString(), time, title });
+const site = buildSite(url.toString(), { time, title });
 
 await Deno.writeTextFile(fileOutput.toString(), site);
