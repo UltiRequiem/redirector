@@ -1,11 +1,15 @@
 import { serve } from "./api_deps.ts";
 import { html } from "../../mod_deps.ts";
 
+import makeloc from "https://deno.land/x/dirname@1.1.2/mod.ts";
+
+const { __dirname, __filename } = makeloc(import.meta);
+
 import type { Handler } from "./api_deps.ts";
 
 import { buildSite } from "../../mod.ts";
 
-const port = 8080;
+const favicon = await Deno.readFile(`${__dirname}/favicon.jpg`);
 
 const handler: Handler = (request) => {
   const requestURL = new URL(request.url);
@@ -18,10 +22,13 @@ const handler: Handler = (request) => {
     "Content-Type": "text/html",
   });
 
-  if (requestURL.pathname === "/favicon.ico") {
-    return new Response("", {
-      status: 404,
-      headers,
+  if (requestURL.pathname === "/favicon.jpg") {
+    const head = new Headers();
+
+    head.set("content-type", "image/jpg");
+
+    return new Response(favicon, {
+      headers: head,
     });
   }
 
@@ -50,6 +57,7 @@ const handler: Handler = (request) => {
     html`
     <head>
       <meta charset="utf-8" />
+      <link rel="icon" type="image/jpg" href="/favicon.jpg"/>
       <title>Create your redirector</title>
     </head>
     <style>body {font-family: Helvetica, serif;margin: 30px;}</style>
@@ -67,4 +75,4 @@ const handler: Handler = (request) => {
   );
 };
 
-await serve(handler, { port });
+await serve(handler);

@@ -13,6 +13,8 @@ export function buildSite(url: string, config: BuildSiteConfig = {}) {
       <head>
         <title>${title}</title>
 
+        <link rel="icon" type="image/jpg" href="/favicon.jpg" />
+
         <script type="module" defer>
           const seconds = document.getElementById("seconds");
 

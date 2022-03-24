@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "api": "deno run --allow-net src/api/api.ts",
-    "api:dev": "deno run --watch --allow-net src/api/api.ts",
+    "api": "deno run --allow-net --allow-read src/api/api.ts",
+    "api:dev": "deno run --watch --allow-net --allow-read src/api/api.ts",
     "cli": "deno run --allow-write src/cli/cli.ts",
     "cli:dev": "deno run --allow-write src/cli/cli.ts"
   }
