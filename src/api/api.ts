@@ -2,7 +2,7 @@ import { serve } from "./api_deps.ts";
 
 import type { Handler } from "./api_deps.ts";
 
-import { buildSite } from "../mod.ts";
+import { buildSite } from "../../mod.ts";
 
 const port = 8080;
 
@@ -17,10 +17,9 @@ const handler: Handler = (request) => {
     }
 
     const time = requestURL.searchParams.get("time");
-    const title = requestURL.searchParams.get("title");
 
     const config = {
-      title,
+      title: requestURL.searchParams.get("title"),
       time: time ? Number.parseInt(time) : undefined,
     };
 

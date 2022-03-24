@@ -1,4 +1,4 @@
-import { buildSite } from "../mod.ts";
+import { buildSite } from "../../mod.ts";
 
 import { parse } from "./cli_deps.ts";
 
