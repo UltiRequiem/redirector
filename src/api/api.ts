@@ -3,7 +3,7 @@ import { html } from "../../mod_deps.ts";
 
 import makeloc from "https://deno.land/x/dirname@1.1.2/mod.ts";
 
-const { __dirname, __filename } = makeloc(import.meta);
+const { __dirname } = makeloc(import.meta);
 
 import type { Handler } from "./api_deps.ts";
 
@@ -51,16 +51,14 @@ const handler: Handler = (request) => {
     return new Response(buildSite(url, config), { headers });
   }
 
-  console.log("not pass");
-
   return new Response(
     html`
     <head>
       <meta charset="utf-8" />
       <link rel="icon" type="image/jpg" href="/favicon.jpg"/>
       <title>Create your redirector</title>
-    </head>
     <style>body {font-family: Helvetica, serif;margin: 30px;}</style>
+    </head>
     <p>GET /?page=YOUR_PAGE_SITE</p>
     <p>
       <form action="/">
