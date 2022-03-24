@@ -4,11 +4,17 @@ Easily create a custom redirector 🚀
 
 ## API
 
-Examples
+### `/`
 
-https://redirector.deno.dev/ultirequiem.com
+> https://redirector.deno.dev
 
-https://redirector.deno.dev/
+A UI that will help you to generate your site redirector.
+
+## `/?page=URL`
+
+> https://redirector.deno.dev/?page=ultirequiem.com
+
+A pretty (soon™) page that wil redirect your users to `$URL`.
 
 ## Support
 

@@ -59,7 +59,7 @@ const handler: Handler = (request) => {
       <title>Create your redirector</title>
     <style>body {font-family: Helvetica, serif;margin: 30px;}</style>
     </head>
-    <p>GET /?page=YOUR_PAGE_SITE</p>
+    <p>GET /?page=URL</p>
     <p>
       <form action="/">
         <input type="text" name="page" placeholder="ultirequiem.com" />
