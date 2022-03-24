@@ -1,4 +1,4 @@
-import { html } from "https://deno.land/x/html@v1.2.0/mod.ts";
+import { html } from "./mod_deps.ts";
 
 export interface BuildSiteConfig {
   title?: string | null;
@@ -6,7 +6,7 @@ export interface BuildSiteConfig {
 }
 
 export function buildSite(url: string, config: BuildSiteConfig = {}) {
-  const { time = 5000, title = "Redirecting..." } = config;
+  const { time = 1000, title = "Redirecting..." } = config;
 
   return html`<!DOCTYPE html>
     <html>
@@ -16,7 +16,7 @@ export function buildSite(url: string, config: BuildSiteConfig = {}) {
         <script type="module" defer>
           const seconds = document.getElementById("seconds");
 
-          let counter = 5;
+          let counter = 3;
 
           setInterval(() => {
             seconds.innerText = counter;
@@ -29,7 +29,7 @@ export function buildSite(url: string, config: BuildSiteConfig = {}) {
       </head>
 
       <body>
-        Redirecting you to "${url}" in <span id="seconds"> 5 </span>
+        Redirecting you to "${url}" in <span id="seconds"> 3 </span>
       </body>
     </html>`;
 }
